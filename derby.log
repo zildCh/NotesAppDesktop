@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Mar 01 14:37:43 NOVT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-018d-f8f2-92b2-00000e2c8560 
+on database directory D:\NotesAppDesktop\notesDB  with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@46f7f36a 
+Loaded from file:/C:/Users/sasha/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.2+13-LTS-58
+user.dir=D:\NotesAppDesktop
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
