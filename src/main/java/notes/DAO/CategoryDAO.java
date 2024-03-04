@@ -79,14 +79,14 @@ public class CategoryDAO {
         return categories;
     }
 
-    public Category getCategoryById(int categoryId) {
+    public String getCategoryById(int categoryId) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category WHERE category_id = ?");
             preparedStatement.setInt(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String category = resultSet.getString("category");
-                return new Category(categoryId, category);
+                return category;
             }
         } catch (SQLException e) {
             e.printStackTrace();

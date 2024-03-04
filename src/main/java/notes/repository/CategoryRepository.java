@@ -28,7 +28,8 @@ public class CategoryRepository {
     public List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();
     }
-    public Category getCategoryById(int categoryId) {
+
+    public String getCategoryById(int categoryId) {
         return categoryDAO.getCategoryById(categoryId);
     }
 

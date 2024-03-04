@@ -5,9 +5,8 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/addNote.fxml" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/delete.png" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/delete.png" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/edit.png" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/edit.png" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/editNote.fxml" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/noteTile2.fxml" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/resources/notes/notesappdesktop/showNotes2.fxml" charset="windows-1251" />
   </component>

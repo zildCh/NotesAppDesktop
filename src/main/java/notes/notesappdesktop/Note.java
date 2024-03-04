@@ -8,7 +8,7 @@ public class Note {
     private int id_category;
 
     public Note() {
-        id = 0;
+        id = 0L;
         title = "";
         content = "";
         date = 0;

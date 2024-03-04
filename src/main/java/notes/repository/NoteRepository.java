@@ -18,7 +18,8 @@ public class NoteRepository {
     }
 
     public void updateNote(Note note) {
-        noteDAO.updateNote(note);
+        long date = now.timeInMillis();
+        noteDAO.updateNote(note, date);
     }
 
     public void deleteNote(Long noteId) {
@@ -29,5 +30,8 @@ public class NoteRepository {
         return noteDAO.getAllNotes();
     }
 
+    public Note getNoteById(long noteId) {
+        return noteDAO.getNoteById(noteId);
+    }
     // Другие методы, если необходимо
 }

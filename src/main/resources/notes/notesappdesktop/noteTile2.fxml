@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:controller="notes.notesappdesktop.NoteTileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="602.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="notes.notesappdesktop.NoteTileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id ="titleLabel" layoutX="14.0" layoutY="3.0" prefHeight="46.0" prefWidth="450.0" text="titleLabel">
          <font>
@@ -23,12 +23,12 @@
             <Font size="16.0" />
          </font></Label>
       <Label fx:id ="categoryLabel" layoutX="14.0" layoutY="125.0" text="categoryLabel" />
-      <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="502.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#handleEditImageClick" fitHeight="38.0" fitWidth="45.0" layoutX="502.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@edit.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="550.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#handleDeleteImageClick" fitHeight="38.0" fitWidth="45.0" layoutX="550.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@delete.png" />
          </image>
