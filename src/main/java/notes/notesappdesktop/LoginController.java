@@ -33,8 +33,9 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("showNotes2.fxml"));
                 Parent showNotesRoot = loader.load();
                 showNotesController controller = loader.getController();
-                controller.setUserLabel(user);
                 controller.setUser(user);
+                controller.setUserLabel(user);
+                controller.Init();
 
                 Scene showNotesScene = new Scene(showNotesRoot);
 

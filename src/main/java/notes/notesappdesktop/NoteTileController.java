@@ -7,12 +7,14 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import notes.httpRequests.HttpRequest;
 import notes.models.Category;
+import notes.models.User;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import java.io.*;
 import java.util.List;
 
 public class NoteTileController {
+    User user = new User();
     HttpRequest httpRequest = new HttpRequest();
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
@@ -52,16 +54,20 @@ public class NoteTileController {
         categoryLabel.setText(categoryRepo.getCategoryById(category_id));
     }
 
+    public void setUser(User user){
+        this.user = user;
+    }
+
     //Note note = new Note(note_id,category_id, );
     @FXML
     private void handleDeleteImageClick() {
         // удаляем заметку
 
-    //   if (httpRequest.deleteNote(category_id,note_id)) {
+       if (httpRequest.deleteNote(user, category_id, note_id)) {
 
            noteRepo.deleteNote(note_id);
-   /*    }
-       else { System.out.println("Error no server connection");}*/
+       }
+       else { System.out.println("Error no server connection");}
 
 
 
@@ -81,7 +87,9 @@ public class NoteTileController {
             stage.setScene(new Scene(root));
             EditNoteController editNoteController = loader.getController();
             editNoteController.setShowNotesController(this.showNotesController);
+            editNoteController.setUser(user);
             stage.show();
+
             //передаем id на всякий
            // editNoteController.setId2(note_id);
             //editNoteController.setCategoryId(category_id);

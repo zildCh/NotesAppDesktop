@@ -39,6 +39,8 @@ public class RegistrationController {
                   Parent showNotesRoot = loader.load();
                   showNotesController controller = loader.getController();
                   controller.setUser(user);
+                  controller.setUserLabel(user);
+                  controller.Init();
 
                   Scene showNotesScene = new Scene(showNotesRoot);
 

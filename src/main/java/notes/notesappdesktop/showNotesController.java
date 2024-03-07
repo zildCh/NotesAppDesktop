@@ -40,7 +40,7 @@ public class showNotesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent loginRoot = loader.load();
             showNotesController controller = loader.getController();
-            controller.setUser(user);
+            //controller.setUser(user);
             Scene loginScene = new Scene(loginRoot);
             // Устанавливаем заголовок окна
             primaryStage.setTitle("Notes App");
@@ -75,7 +75,7 @@ public class showNotesController implements Initializable {
             stage.setScene(new Scene(root));
             AddNoteController addNoteController = loader.getController();
             addNoteController.setShowNotesController(this);
-
+            addNoteController.setUser(user);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,8 +84,9 @@ public class showNotesController implements Initializable {
     public void setUser(User user) {
         this.user = user;
     }
-
     // Метод для добавления заметок в список плиток
+
+
     public void addNoteTile(Note note) {
         // Получаем название категории по id_category
        // String categoryName = getCategoryNameById(note.getCategory());
@@ -96,6 +97,8 @@ public class showNotesController implements Initializable {
         try {
             Node noteTile = loader.load();
             NoteTileController controller = loader.getController();
+
+            controller.setUser(user);
             controller.setId(note.getId());
             controller.setTitle(note.getTitle());
             controller.setContent(note.getContent());
@@ -125,6 +128,11 @@ public class showNotesController implements Initializable {
        // Note note = new Note(0L,2, "Evening with family", "We're all planning to watch a new movie tonight.", System.currentTimeMillis());
 
         //noteRepo.createNote(note);
+
+
+
+        };
+    public void Init() {
         List<String> allCategoryNames = categoryRepo.getAllCategories().stream()
                 .map(Category::getCategory)
                 .collect(Collectors.toList());
@@ -137,8 +145,9 @@ public class showNotesController implements Initializable {
             if (newValue != null) { // Установка выбранной категории
                 refreshNoteList(); // Вызов метода для обновления списка заметок
             }
-        });
 
+
+        });
 
 /*        // Установка слушателя для фильтрации заметок по выбранной категории
         categoryFilterCheckbox.setOnAction(event -> {
@@ -167,6 +176,7 @@ public class showNotesController implements Initializable {
                 notes;
         for (Note note : filteredNotes) {
             addNoteTile(note);
+            System.out.println(user.getId());
             //noteRepo.deleteNote(note.getId());
         }
 

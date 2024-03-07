@@ -43,9 +43,9 @@ public class HttpRequest {
         // Подготавливаем JSON с логином и паролем
         String json = "{\"nickname\": \"" + nickname + "\", \"password\": \"" + password + "\"}";
         StringEntity httpentity = new StringEntity(json, ContentType.APPLICATION_JSON);
-
         httpPatch.setEntity(httpentity);
 
+        System.out.println(json);
         // Отправляем запрос и получаем ответ
         try {
             HttpResponse response = httpClient.execute(httpPatch);
@@ -66,6 +66,7 @@ public class HttpRequest {
 
                 //извлекаем user
                 int userId = userSer.getId();
+
                 User user = new User(nickname, password, userId);
 
                 //извлекаем список UserCategory связей
@@ -291,8 +292,10 @@ public class HttpRequest {
         String url = "http://localhost:8080/users/" + userId + "/category/" + categoryId + "/notes";
         String content = note.getContent();
         String header = note.getTitle();
-        String date = "jopa";
-        // long date = note.getDate();                //long or string????
+
+        System.out.println(userId);
+        System.out.println(categoryId);
+         long date = note.getDate();                //long or string????
         // Создаем POST-запрос
         HttpPost request = new HttpPost(url);
 
@@ -308,6 +311,7 @@ public class HttpRequest {
             request.setEntity(entity);
             request.setHeader("Content-type", "application/json");
 
+            System.out.println(json);
             // Отправляем запрос на сервер
             HttpResponse response = httpClient.execute(request);
 
@@ -316,9 +320,14 @@ public class HttpRequest {
 
             // Если запрос выполнен успешно (код 201), извлекаем id созданной заметки из ответа
             if (statusCode == 201) {
-                String responseBody = EntityUtils.toString(response.getEntity());
-                JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
-                long noteId = jsonResponse.getAsJsonPrimitive("id").getAsLong();
+             String responseBody = EntityUtils.toString(response.getEntity());
+                //JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
+                //long noteId = jsonResponse.getAsJsonPrimitive("id").getAsLong();
+               // return noteId;
+                // JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
+                // Получаем значение поля "id" как long
+                long noteId  = Long.parseLong(responseBody); //jsonResponse.getAsJsonPrimitive("id").getAsLong();
+                // Выводим значение ID заметки
                 return noteId;
             }
             else if (statusCode == 404){
@@ -424,12 +433,16 @@ public class HttpRequest {
         }
     }
 
-    public boolean deleteNote(long categoryId, long noteId) {
+    public boolean deleteNote(User user, long categoryId, long noteId) {
         // Создаем HttpClient
         HttpClient httpClient = HttpClients.createDefault();
-
+        System.out.println(categoryId);
+        System.out.println(noteId);
         // Формируем URL для запроса
-        String url = "http://localhost:8080/category/" + categoryId + "/notes/" + noteId;
+
+        int userId = user.getId();
+        System.out.println(userId);
+        String url = "http://localhost:8080/users/" + userId + "/category/" + categoryId + "/notes/" + noteId;
 
         // Создаем DELETE-запрос
         HttpDelete request = new HttpDelete(url);
@@ -440,7 +453,7 @@ public class HttpRequest {
 
             // Получаем код ответа
             int statusCode = response.getStatusLine().getStatusCode();
-
+            System.out.println(statusCode);
             // Возвращаем код ответа
             if (statusCode == 200) {
                 return true;

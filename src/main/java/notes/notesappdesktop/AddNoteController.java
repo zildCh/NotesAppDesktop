@@ -37,6 +37,9 @@ public class AddNoteController implements Initializable {
 
     private List<Category> categories; // Список категорий
 
+    public void setUser(User user){
+    this.user = user;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,9 +51,7 @@ public class AddNoteController implements Initializable {
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categoryNames));
         categoryChoiceBox.getSelectionModel().selectFirst();
     }
-    public  void setUser(User user){
-        this.user = user;
-    }
+
     @FXML
     private void addNote(ActionEvent event) {
         HttpRequest httpRequest = new HttpRequest();

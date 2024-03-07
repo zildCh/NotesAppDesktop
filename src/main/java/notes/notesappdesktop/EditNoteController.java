@@ -2,8 +2,10 @@ package notes.notesappdesktop;
 
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
+import notes.httpRequests.HttpRequest;
 import notes.models.Category;
 import notes.models.Note;
+import notes.models.User;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EditNoteController{
+    User user = new User();
     private final Now now = new Now.Base();
     @FXML
     private TextField titleField;
@@ -23,8 +26,10 @@ public class EditNoteController{
     @FXML
     private ChoiceBox<String> categoryChoiceBox;
 
+
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
+    HttpRequest httpRequest = new HttpRequest();
 
     private List<Category> categories; // Список категорий
     private List<Note> notes;
@@ -60,6 +65,11 @@ public class EditNoteController{
         setContent(note.getContent());
         setCategoryChoiceBox(FXCollections.observableArrayList(categoryNames), currentCategory);
     }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
     @FXML
     private void saveNote() {
 
@@ -75,18 +85,21 @@ public class EditNoteController{
 
 
        // Note note = new Note(note_id,1, "title", "content", 0L);
-        System.out.println(category_id);
+      /*  System.out.println(category_id);
         System.out.println(content);
         System.out.println(title);
-        System.out.println(note_id);
+        System.out.println(note_id);*/
         //noteRepo.deleteNote(note_id);
        // noteRepo.deleteNote(note_id);
         //ЗАкрываем окно
         Stage stage = (Stage) titleField.getScene().getWindow();
         stage.close();
 
-        noteRepo.updateNote(note2);
-
+        boolean upd = httpRequest.updateNote(user, note2);
+        if (upd) {
+            noteRepo.updateNote(note2);
+        }
+        else System.out.println("Error");
 
 
         if (showNotesController != null) {
