@@ -1,8 +1,13 @@
 package notes.notesappdesktop;
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class Note {
     private long id;
+    @SerializedName("header")
     private String title;
+    @SerializedName("note")
     private String content;
     private  long date;
     private int id_category;
@@ -61,40 +66,7 @@ public class Note {
         this.id_category = id_category;
     }
 
-    private String htmlParser(String text) {
-        String[] textArr = text.split("&");
-        for (String x : textArr) {
-            try {
-                x = x.split(";")[0];
-                switch (x) {
-                    case "amp":
-                        text = text.replace("&amp;", "&");
-                        break;
-                    case "quot":
-                        text = text.replace("&quot;", "\"");
-                        break;
-                    case "lt":
-                        text = text.replace("&lt;", "<");
-                        break;
-                    case "gt":
-                        text = text.replace("&gt;", ">");
-                        break;
-                }
-            } catch (Exception e) {
-                //
-            }
-        }
 
-        if (text.contains("\\\'")){
-            text = text.replace("\\\'", "\'");
-        }
-
-        if (text.contains("\\\\")){
-            text = text.replace("\\\\", "\\");
-        }
-
-        return text;
-    }
 
 }
 

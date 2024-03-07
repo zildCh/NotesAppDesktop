@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import notes.httpRequests.HttpRequest;
 
 
 
 public class AddNoteController implements Initializable {
+    private final Now now = new Now.Base();
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
     private showNotesController showNotesController;
@@ -41,16 +42,27 @@ public class AddNoteController implements Initializable {
                 .map(Category::getCategory)
                 .collect(Collectors.toList());
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categoryNames));
+        categoryChoiceBox.getSelectionModel().selectFirst();
     }
 
     @FXML
     private void addNote(ActionEvent event) {
+        HttpRequest httpRequest = new HttpRequest();
         String title = titleField.getText();
         String category = categoryChoiceBox.getValue();
         String content = contentField.getText();
         int category_id = categoryRepo.getCategoryIdByString(category);
-        Note note = new Note(0L,category_id, title, content, 0L);
+        long date = now.timeInMillis();
+
+
+        Note note = new Note(0L,category_id, title, content, date);
+
+     /*   long noteId = httpRequest.createNote(note);
+
+        noteRepo.createNote(noteId, note);*/
+
         noteRepo.createNote(note);
+
 
         //ЗАкрываем окно
         Stage stage = (Stage) titleField.getScene().getWindow();

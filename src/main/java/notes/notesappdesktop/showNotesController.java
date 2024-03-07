@@ -1,6 +1,8 @@
 package notes.notesappdesktop;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
+import notes.httpRequests.HttpRequest;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import java.util.Date;
@@ -28,10 +30,45 @@ import javafx.scene.Scene;
 public class showNotesController implements Initializable {
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
+    HttpRequest httpRequest = new HttpRequest();
+    User user = new User();
     @FXML
     private VBox vbox;
     @FXML
     private ChoiceBox<String> categoryFilterChoiceBox;
+    @FXML
+    private void logoutButton(){
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent loginRoot = loader.load();
+            showNotesController controller = loader.getController();
+            controller.setUser(user);
+            Scene loginScene = new Scene(loginRoot);
+            // Устанавливаем заголовок окна
+            primaryStage.setTitle("Notes App");
+            // Устанавливаем начальную сцену (экран заметок)
+            primaryStage.setScene(loginScene);
+            primaryStage.show();
+
+            Stage stage = (Stage) vbox.getScene().getWindow();
+            stage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void updateButton(){
+        httpRequest.updateData(user.getId());
+        refreshNoteList();
+
+    }
+    @FXML
+    private Label loginLabel;
+    @FXML
+    private Label userLabel;
     @FXML
     private void handleAddButton() {  //обработчик нажатия на кнопку добавления заметки
         try {
@@ -47,6 +84,10 @@ public class showNotesController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     // Метод для добавления заметок в список плиток
     public void addNoteTile(Note note) {
         // Получаем название категории по id_category
@@ -80,7 +121,8 @@ public class showNotesController implements Initializable {
         });*/
         //CategoryRepository categoryRepo = new CategoryRepository();
        // List<Category> categories = new ArrayList<>();
-       //Category category = new Category(2, "Family");
+       //Category category = new Category(6, "Study");
+        //categoryRepo.deleteCategory(2);
         //categoryRepo.createCategory(category);
          // Note note = new Note(0L,1, "Skiing", "I'm going skiing on Wednesday", System.currentTimeMillis());
        // Note note = new Note(0L,2, "Evening with family", "We're all planning to watch a new movie tonight.", System.currentTimeMillis());
@@ -107,6 +149,7 @@ public class showNotesController implements Initializable {
             refreshNoteList();
         });*/
     }
+
 
     public void refreshNoteList() {
         String selectedCategory = categoryFilterChoiceBox.getValue();

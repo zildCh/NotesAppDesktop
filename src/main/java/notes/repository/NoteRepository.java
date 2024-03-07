@@ -16,11 +16,21 @@ public class NoteRepository {
         long date = now.timeInMillis();
         noteDAO.addNote(id, note, date);
     }
+    public void addNote(Note note) {
+        long id = note.getId();
+        long date = note.getDate();
+        noteDAO.addNote(id, note, date);
+    }
+    public void createNote(long id, Note note) {
+        long date = now.timeInMillis();
+        noteDAO.addNote(id, note, date);
+    }
 
     public void updateNote(Note note) {
-        long date = now.timeInMillis();
+        long date = note.getDate();
         noteDAO.updateNote(note, date);
     }
+
 
     public void deleteNote(Long noteId) {
         noteDAO.deleteNote(noteId);

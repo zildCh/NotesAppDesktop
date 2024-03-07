@@ -23,6 +23,9 @@ public class HelloApplication extends Application {
         Parent showNotesRoot = FXMLLoader.load(getClass().getResource("showNotes2.fxml"));
         Scene showNotesScene = new Scene(showNotesRoot);
 
+/*        Parent showNotesRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene showNotesScene = new Scene(showNotesRoot);*/
+
         // Устанавливаем заголовок окна
         primaryStage.setTitle("Notes App");
 

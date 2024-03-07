@@ -13,13 +13,21 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="241.0">
          <children>
-            <Button layoutX="95.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="42.0" prefWidth="71.0" text="Add Note" />
-            <ChoiceBox fx:id = "categoryFilterChoiceBox" layoutX="56.0" layoutY="155.0" prefWidth="150.0" />
+            <Button layoutX="95.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="42.0" prefWidth="71.0" text="Add Note" />
+            <ChoiceBox fx:id="categoryFilterChoiceBox" layoutX="56.0" layoutY="155.0" prefWidth="150.0" />
             <Label layoutX="56.0" layoutY="129.0" text="Category filter">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
+            <Button layoutX="180.0" layoutY="495.0" mnemonicParsing="false" onAction="#logoutButton" text="Logout" />
+            <Label fx:id="loginLabel" layoutX="51.0" layoutY="498.0" prefHeight="17.0" prefWidth="118.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="userLabel" layoutX="51.0" layoutY="478.0" text="User:" />
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateButton" text="Update" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="601.0">
          <children>

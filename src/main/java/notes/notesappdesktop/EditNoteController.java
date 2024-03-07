@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class EditNoteController{
+    private final Now now = new Now.Base();
     @FXML
     private TextField titleField;
     @FXML
@@ -69,7 +70,12 @@ public class EditNoteController{
         String category = categoryChoiceBox.getValue();
         String content = contentField.getText();
         int category_id = categoryRepo.getCategoryIdByString(category);
-        Note note2 = new Note(note_id,category_id, title, content, 0L);
+
+        long date = now.timeInMillis();
+
+        Note note2 = new Note(note_id,category_id, title, content, date);
+
+
        // Note note = new Note(note_id,1, "title", "content", 0L);
         System.out.println(category_id);
         System.out.println(content);

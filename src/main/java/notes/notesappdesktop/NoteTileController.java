@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import notes.httpRequests.HttpRequest;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import java.io.*;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class NoteTileController {
-
+    HttpRequest httpRequest = new HttpRequest();
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
     private List<Category> categories; // Список категорий
@@ -56,8 +57,15 @@ public class NoteTileController {
     @FXML
     private void handleDeleteImageClick() {
         // удаляем заметку
-        noteRepo.deleteNote(note_id);
-        //System.out.println(note_id);
+
+    //   if (httpRequest.deleteNote(category_id,note_id)) {
+
+           noteRepo.deleteNote(note_id);
+   /*    }
+       else { System.out.println("Error no server connection");}*/
+
+
+
         // обновляем список
         if (showNotesController != null) {
            showNotesController.refreshNoteList();
