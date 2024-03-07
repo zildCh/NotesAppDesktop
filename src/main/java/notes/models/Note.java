@@ -1,4 +1,4 @@
-package notes.notesappdesktop;
+package notes.models;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

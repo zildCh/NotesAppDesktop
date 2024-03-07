@@ -1,8 +1,5 @@
 package notes.notesappdesktop;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -11,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import notes.httpRequests.HttpRequest;
+import notes.models.User;
+
 import java.io.*;
 
 public class LoginController {
@@ -34,7 +33,8 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("showNotes2.fxml"));
                 Parent showNotesRoot = loader.load();
                 showNotesController controller = loader.getController();
-               // controller.setUser(user);
+                controller.setUserLabel(user);
+                controller.setUser(user);
 
                 Scene showNotesScene = new Scene(showNotesRoot);
 

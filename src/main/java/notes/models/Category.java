@@ -1,10 +1,11 @@
-package notes.notesappdesktop;
-import com.google.gson.Gson;
+package notes.models;
 import com.google.gson.annotations.SerializedName;
+import notes.models.Note;
+
 import java.util.List;
 
 public class Category {
-
+    @SerializedName("id")
     private int category_id;
     private String category;
 

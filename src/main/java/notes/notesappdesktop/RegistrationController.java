@@ -1,20 +1,19 @@
 package notes.notesappdesktop;
 
 import javafx.fxml.FXML;
-import javafx.scene.*;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.fxml.FXMLLoader;
 
 import java.io.*;
-import java.nio.channels.NetworkChannel;
-import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import notes.httpRequests.HttpRequest;
+import notes.models.User;
 
 public class RegistrationController {
     @FXML

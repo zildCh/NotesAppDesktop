@@ -1,7 +1,7 @@
 package notes.repository;
 import notes.DAO.CategoryDAO;
-import notes.notesappdesktop.Category;
-import notes.notesappdesktop.Now;
+import notes.models.Category;
+
 import java.util.List;
 
 public class CategoryRepository {

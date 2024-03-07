@@ -1,19 +1,17 @@
 package notes.notesappdesktop;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import notes.models.Category;
+import notes.models.Note;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class EditNoteController{

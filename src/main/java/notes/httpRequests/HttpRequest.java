@@ -1,26 +1,24 @@
 package notes.httpRequests;
-import notes.notesappdesktop.AddNoteController;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpDelete;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.apache.http.HttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.entity.StringEntity;
 //import java.io.IOException;
 import java.io.*;
-import notes.notesappdesktop.Category;
-import notes.notesappdesktop.Note;
-import notes.notesappdesktop.User;
+import notes.models.Category;
+import notes.models.UserCategoryLink;
+import notes.models.Note;
+import notes.models.User;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.entity.ContentType;
@@ -40,17 +38,17 @@ public class HttpRequest {
     public User authorization(String nickname, String password) {
         HttpClient httpClient = HttpClients.createDefault();
         String url = "http://localhost:8080/users/";
-        HttpGetWithEntity httpGet = new HttpGetWithEntity(url);
-
+        // HttpGetWithEntity httpGet = new HttpGetWithEntity(url);
+        HttpPatch httpPatch = new HttpPatch(url);
         // Подготавливаем JSON с логином и паролем
         String json = "{\"nickname\": \"" + nickname + "\", \"password\": \"" + password + "\"}";
         StringEntity httpentity = new StringEntity(json, ContentType.APPLICATION_JSON);
 
-        httpGet.setEntity(httpentity);
+        httpPatch.setEntity(httpentity);
 
         // Отправляем запрос и получаем ответ
         try {
-            HttpResponse response = httpClient.execute(httpGet);
+            HttpResponse response = httpClient.execute(httpPatch);
 
             // Получаем код ответа
             int statusCode = response.getStatusLine().getStatusCode();
@@ -70,13 +68,20 @@ public class HttpRequest {
                 int userId = userSer.getId();
                 User user = new User(nickname, password, userId);
 
-                //извлекаем список category
-                List<Category> categories = userSer.getCategories();
+                //извлекаем список UserCategory связей
+                List<UserCategoryLink> userCategoryLinks = userSer.getUserCategoryLinks();
 
+                List<Note> allNotes = new ArrayList<>();
                 //извлекаем список категорий
-                List<Note> notes = new ArrayList<>();
-                for (Category category : userSer.getCategories()) {
-                    notes.addAll(category.getNotes());
+                for (UserCategoryLink link : userCategoryLinks) {
+                    Category category = link.getCategory();
+                    int categoryId = category.getCategory_id(); // Получаем ID категории
+                    List<Note> notes = link.getNotes();
+                    // Устанавливаем categoryId для каждой заметки
+                    for (Note note : notes) {
+                        note.setCategory(categoryId);
+                    }
+                    allNotes.addAll(notes);
                 }
 
                 //Удаляем старые заметки
@@ -85,9 +90,9 @@ public class HttpRequest {
                     noteRepo.deleteNote(note.getId());
                 }
 
-                if (!notes.isEmpty()) {
+                if (!allNotes.isEmpty()) {
                 //Добавляем новые если они есть
-                for (Note note : notes) {
+                for (Note note : allNotes) {
                     noteRepo.addNote(note);
                 }
 
@@ -184,15 +189,22 @@ public class HttpRequest {
 
                 User userSer = gson.fromJson(responseBody, User.class);
 
-                //извлекаем список category
-                List<Category> categories = userSer.getCategories();
+                //извлекаем список UserCategory связей
+                List<UserCategoryLink> userCategoryLinks = userSer.getUserCategoryLinks();
+
+                List<Note> allNotes = new ArrayList<>();
 
                 //извлекаем список категорий
-                List<Note> notes = new ArrayList<>();
-                for (Category category : userSer.getCategories()) {
-                    notes.addAll(category.getNotes());
+                for (UserCategoryLink link : userCategoryLinks) {
+                    Category category = link.getCategory();
+                    int categoryId = category.getCategory_id(); // Получаем ID категории
+                    List<Note> notes = link.getNotes();
+                    // Устанавливаем categoryId для каждой заметки
+                    for (Note note : notes) {
+                        note.setCategory(categoryId);
+                    }
+                    allNotes.addAll(notes);
                 }
-                // Если ответ успешный (код 200), возвращаем true
 
                 //Удаляем старые заметки
                 List<Note> oldNotes= noteRepo.getAllNotes();
@@ -200,9 +212,9 @@ public class HttpRequest {
                     noteRepo.deleteNote(note.getId());
                 }
 
-                if (!notes.isEmpty()) {
+                if (!allNotes.isEmpty()) {
                     //Добавляем новые если они есть
-                    for (Note note : notes) {
+                    for (Note note : allNotes) {
                         noteRepo.addNote(note);
                     }
 
@@ -270,15 +282,17 @@ public class HttpRequest {
         }
     }
 
-    public long createNote(Note note) {
+    public long createNote(User user, Note note) {
         // Создаем HttpClient
         HttpClient httpClient = HttpClients.createDefault();
         int categoryId = note.getCategory();
+        int userId = user.getId();
         // Формируем URL для запроса
-        String url = "http://localhost:8080/category/" + categoryId + "/notes";
+        String url = "http://localhost:8080/users/" + userId + "/category/" + categoryId + "/notes";
         String content = note.getContent();
         String header = note.getTitle();
-        long date = note.getDate();                //long or string????
+        String date = "jopa";
+        // long date = note.getDate();                //long or string????
         // Создаем POST-запрос
         HttpPost request = new HttpPost(url);
 
@@ -306,14 +320,18 @@ public class HttpRequest {
                 JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
                 long noteId = jsonResponse.getAsJsonPrimitive("id").getAsLong();
                 return noteId;
-            } else {
+            }
+            else if (statusCode == 404){
+                return -10;
+            }
+            else {
                 // В случае ошибки возвращаем -1
                 return -1;
             }
         } catch (IOException e) {
             // Обработка ошибок ввода-вывода
             e.printStackTrace();
-            return -1; // Возвращаем -1 в случае ошибки
+            return -12; // Возвращаем -1 в случае ошибки
         }
     }
 
@@ -359,17 +377,17 @@ public class HttpRequest {
         }
     }
 
-    public boolean updateNote(Note note) {
+    public boolean updateNote(User user, Note note) {
         // Создаем HttpClient
         HttpClient httpClient = HttpClients.createDefault();
-
+        int userId = user.getId();
         long noteId = note.getId();
         String content = note.getContent();
         Long date = note.getDate();
         int categoryId = note.getCategory();
         String header = note.getTitle();
         // Формируем URL для запроса
-        String url = "http://localhost:8080/category/" + categoryId + "/notes/" + noteId;
+        String url = "http://localhost:8080/users/" + userId + "/category/" + categoryId + "/notes/" + noteId;
 
         // Создаем PUT-запрос
         HttpPut request = new HttpPut(url);

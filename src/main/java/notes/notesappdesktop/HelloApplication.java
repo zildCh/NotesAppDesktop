@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
        // Scene addNoteScene = new Scene(addNoteRoot);
 
         // Загружаем FXML файл для экрана отображения заметок
-        Parent showNotesRoot = FXMLLoader.load(getClass().getResource("showNotes2.fxml"));
+        Parent showNotesRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene showNotesScene = new Scene(showNotesRoot);
 
 /*        Parent showNotesRoot = FXMLLoader.load(getClass().getResource("login.fxml"));

@@ -1,8 +1,10 @@
 package notes.notesappdesktop;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import notes.httpRequests.HttpRequest;
+import notes.models.Category;
+import notes.models.Note;
+import notes.models.User;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import java.util.Date;
@@ -12,7 +14,6 @@ import java.io.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.TilePane;
 import javafx.fxml.FXMLLoader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,10 +23,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 
 public class showNotesController implements Initializable {
     CategoryRepository categoryRepo = new CategoryRepository();
@@ -141,6 +138,8 @@ public class showNotesController implements Initializable {
                 refreshNoteList(); // Вызов метода для обновления списка заметок
             }
         });
+
+
 /*        // Установка слушателя для фильтрации заметок по выбранной категории
         categoryFilterCheckbox.setOnAction(event -> {
             refreshNoteList();
@@ -149,7 +148,9 @@ public class showNotesController implements Initializable {
             refreshNoteList();
         });*/
     }
-
+    public void setUserLabel(User user){
+        loginLabel.setText(user.getUsername());
+    }
 
     public void refreshNoteList() {
         String selectedCategory = categoryFilterChoiceBox.getValue();

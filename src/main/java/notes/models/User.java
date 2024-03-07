@@ -1,14 +1,15 @@
-package notes.notesappdesktop;
-import com.google.gson.Gson;
+package notes.models;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class User {
+    @SerializedName("nickname")
     private String username;
     private String password;
     private int id;
-    @SerializedName("categoryDaoList")
-    private List<Category> categories;
+    @SerializedName("userCategoryLinkList")
+    private List<UserCategoryLink> userCategoryLinks;
 
     public User(String username, String password, int id) {
         this.username = username;
@@ -21,6 +22,7 @@ public class User {
     public int getId() {
         return id;
     }
+
     public String getUsername() {
         return username;
     }
@@ -28,7 +30,15 @@ public class User {
         return password;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    // Сеттер для username
+    public void setUsername(String username) {
+        this.username = username;
     }
+    public void setPassword(String username) {
+        this.username = username;
+    }
+    public List<UserCategoryLink> getUserCategoryLinks() {
+        return userCategoryLinks;
+    }
+
 }

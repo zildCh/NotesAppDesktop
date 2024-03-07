@@ -3,8 +3,8 @@ package notes.notesappdesktop;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import notes.DAO.NoteDAO;
 import notes.DAO.CategoryDAO;
+import notes.models.Category;
 
 import java.util.ArrayList;
 import java.util.List;

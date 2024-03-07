@@ -8,6 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import notes.models.Category;
+import notes.models.Note;
+import notes.models.User;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
 import java.util.stream.Collectors;
@@ -19,6 +22,7 @@ import notes.httpRequests.HttpRequest;
 
 
 public class AddNoteController implements Initializable {
+    User user = new User();
     private final Now now = new Now.Base();
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
@@ -44,7 +48,9 @@ public class AddNoteController implements Initializable {
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categoryNames));
         categoryChoiceBox.getSelectionModel().selectFirst();
     }
-
+    public  void setUser(User user){
+        this.user = user;
+    }
     @FXML
     private void addNote(ActionEvent event) {
         HttpRequest httpRequest = new HttpRequest();
@@ -57,11 +63,11 @@ public class AddNoteController implements Initializable {
 
         Note note = new Note(0L,category_id, title, content, date);
 
-     /*   long noteId = httpRequest.createNote(note);
+        long noteId = httpRequest.createNote(user, note);
 
-        noteRepo.createNote(noteId, note);*/
+        noteRepo.createNote(noteId, note);
 
-        noteRepo.createNote(note);
+        // noteRepo.createNote(note);
 
 
         //ЗАкрываем окно

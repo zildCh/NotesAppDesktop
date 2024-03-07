@@ -1,5 +1,5 @@
 package notes.repository;
-import notes.notesappdesktop.Note;
+import notes.models.Note;
 import notes.DAO.NoteDAO;
 import notes.notesappdesktop.Now;
 import java.util.List;

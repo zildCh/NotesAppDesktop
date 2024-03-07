@@ -1,5 +1,5 @@
 package notes.DAO;
-import notes.notesappdesktop.Category;
+import notes.models.Category;
 
 import java.sql.*;
 import java.util.ArrayList;

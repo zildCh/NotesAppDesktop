@@ -9,6 +9,8 @@ module notes.notesappdesktop {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+
+
     requires java.sql;
     requires org.apache.httpcomponents.httpcore;
     requires org.apache.httpcomponents.httpclient;
@@ -18,5 +20,8 @@ module notes.notesappdesktop {
     exports notes.DAO;
     exports notes.httpRequests;
     opens notes.httpRequests to com.google.gson.Gson;
+
     opens notes.DAO to javafx.fxml;
+    exports notes.models;
+    opens notes.models to com.google.gson, javafx.fxml;
 }
