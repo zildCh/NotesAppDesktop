@@ -32,13 +32,11 @@ public class LoginController {
                 Stage primaryStage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("showNotes2.fxml"));
                 Parent showNotesRoot = loader.load();
-                showNotesController controller = loader.getController();
+                ShowNotesController controller = loader.getController();
                 controller.setUser(user);
                 controller.setUserLabel(user);
                 controller.Init();
-
                 Scene showNotesScene = new Scene(showNotesRoot);
-
                 // Устанавливаем заголовок окна
                 primaryStage.setTitle("Notes App");
                 // Устанавливаем начальную сцену (экран заметок)
@@ -65,11 +63,7 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("registration.fxml"));
             Parent root = loader.load();
-            // Получаем сцену
             Scene scene = loginField.getScene();
-            // Получаем корневой узел из сцены
-            Parent root2 = scene.getRoot();
-            // Устанавливаем новый корневой узел
             scene.setRoot(root);
 
         } catch (IOException e) {

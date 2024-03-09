@@ -1,7 +1,7 @@
 package notes.repository;
 import notes.models.Note;
 import notes.DAO.NoteDAO;
-import notes.notesappdesktop.Now;
+import notes.models.Now;
 import java.util.List;
 public class NoteRepository {
     private final NoteDAO noteDAO;

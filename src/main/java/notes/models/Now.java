@@ -1,4 +1,4 @@
-package notes.notesappdesktop;
+package notes.models;
 
 public interface Now {
     long timeInMillis();

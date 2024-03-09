@@ -24,7 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class showNotesController implements Initializable {
+public class ShowNotesController implements Initializable {
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
     HttpRequest httpRequest = new HttpRequest();
@@ -39,8 +39,7 @@ public class showNotesController implements Initializable {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent loginRoot = loader.load();
-            showNotesController controller = loader.getController();
-            //controller.setUser(user);
+            LoginController controller = loader.getController();
             Scene loginScene = new Scene(loginRoot);
             // Устанавливаем заголовок окна
             primaryStage.setTitle("Notes App");
@@ -65,8 +64,6 @@ public class showNotesController implements Initializable {
     @FXML
     private Label loginLabel;
     @FXML
-    private Label userLabel;
-    @FXML
     private void handleAddButton() {  //обработчик нажатия на кнопку добавления заметки
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("addNote.fxml"));
@@ -88,8 +85,6 @@ public class showNotesController implements Initializable {
 
 
     public void addNoteTile(Note note) {
-        // Получаем название категории по id_category
-       // String categoryName = getCategoryNameById(note.getCategory());
         // Преобразуем дату из миллисекунд в строку
         String formattedDate = convertMillisToDate(note.getDate());
         // Создайте новый экземпляр макета FXML для заметки
@@ -113,25 +108,8 @@ public class showNotesController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {};
 
-       /* handleSaveNoteEvent(SaveNoteEvent.SAVE_NOTE, event -> {
-            // Выполните необходимые действия при сохранении заметки
-            refreshNoteList(); // Например, обновление списка заметок
-        });*/
-        //CategoryRepository categoryRepo = new CategoryRepository();
-       // List<Category> categories = new ArrayList<>();
-       //Category category = new Category(6, "Study");
-        //categoryRepo.deleteCategory(2);
-        //categoryRepo.createCategory(category);
-         // Note note = new Note(0L,1, "Skiing", "I'm going skiing on Wednesday", System.currentTimeMillis());
-       // Note note = new Note(0L,2, "Evening with family", "We're all planning to watch a new movie tonight.", System.currentTimeMillis());
-
-        //noteRepo.createNote(note);
-
-
-
-        };
     public void Init() {
         List<String> allCategoryNames = categoryRepo.getAllCategories().stream()
                 .map(Category::getCategory)
@@ -149,13 +127,6 @@ public class showNotesController implements Initializable {
 
         });
 
-/*        // Установка слушателя для фильтрации заметок по выбранной категории
-        categoryFilterCheckbox.setOnAction(event -> {
-            refreshNoteList();
-        });
-        categoryFilterChoiceBox.setOnAction(event -> {
-            refreshNoteList();
-        });*/
     }
     public void setUserLabel(User user){
         loginLabel.setText(user.getUsername());
@@ -176,22 +147,11 @@ public class showNotesController implements Initializable {
                 notes;
         for (Note note : filteredNotes) {
             addNoteTile(note);
-            System.out.println(user.getId());
-            //noteRepo.deleteNote(note.getId());
         }
 
         // Код для обновления списка заметок
     }
 
-    /*private String getCategoryNameById(int categoryId) {
-        CategoryRepository categoryRepo = new CategoryRepository();
-        Category category = categoryRepo.getCategoryById(categoryId);
-        if (category != null) {
-            return category.getCategory();
-        } else {
-            return ""; // Если категория не найдена, возвращаем пустую строку или другое значение по умолчанию
-        }
-    }*/
     private String convertMillisToDate(long millis) {
         Date date = new Date(millis);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");

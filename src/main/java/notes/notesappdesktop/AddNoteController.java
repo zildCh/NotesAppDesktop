@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import notes.models.Category;
 import notes.models.Note;
+import notes.models.Now;
 import notes.models.User;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
@@ -26,7 +27,7 @@ public class AddNoteController implements Initializable {
     private final Now now = new Now.Base();
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
-    private showNotesController showNotesController;
+    private ShowNotesController showNotesController;
 
     @FXML
     private TextField titleField;
@@ -78,11 +79,8 @@ public class AddNoteController implements Initializable {
             showNotesController.refreshNoteList();
         }
     }
-    public void setShowNotesController(showNotesController controller) {
+    public void setShowNotesController(ShowNotesController controller) {
         this.showNotesController = controller;
     }
-    // Метод для установки списка категорий
-    //public void setCategories(List<String> categories) {
-       // this.categories = categories;
-   // }
+
 }

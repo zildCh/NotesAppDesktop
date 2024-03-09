@@ -19,7 +19,7 @@ public class NoteTileController {
     CategoryRepository categoryRepo = new CategoryRepository();
     NoteRepository noteRepo = new NoteRepository();
     private List<Category> categories; // Список категорий
-    private showNotesController showNotesController;
+    private ShowNotesController showNotesController;
 
     @FXML
     private Label titleLabel;
@@ -58,18 +58,13 @@ public class NoteTileController {
         this.user = user;
     }
 
-    //Note note = new Note(note_id,category_id, );
     @FXML
     private void handleDeleteImageClick() {
         // удаляем заметку
-
        if (httpRequest.deleteNote(user, category_id, note_id)) {
-
            noteRepo.deleteNote(note_id);
        }
-       else { System.out.println("Error no server connection");}
-
-
+       else { System.out.println("Error: no server connection");}
 
         // обновляем список
         if (showNotesController != null) {
@@ -78,38 +73,24 @@ public class NoteTileController {
     }
     @FXML
     private void handleEditImageClick() {
-        // Ваш код обработки нажатия на картинку
+        // Обрабатываем нажатие на кнопку edit
         FXMLLoader loader = new FXMLLoader(getClass().getResource("editNote.fxml"));
         try {
             Parent root = loader.load();
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             EditNoteController editNoteController = loader.getController();
             editNoteController.setShowNotesController(this.showNotesController);
             editNoteController.setUser(user);
             stage.show();
-
-            //передаем id на всякий
-           // editNoteController.setId2(note_id);
-            //editNoteController.setCategoryId(category_id);
-
             editNoteController.setNoteAndCategory(note_id, category_id);
-            //получаем категории
-
-      /*      categoryChoiceBox.setItems(FXCollections.observableArrayList(categoryNames));
-            categoryChoiceBox.setValue(currentCategory);
-            System.out.println(note_id);
-            System.out.println(categoryId);
-            titleField.setText(note1.getTitle());
-            contentField.setText(note1.getContent());*/
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void setShowNotesController(showNotesController controller) {
+    public void setShowNotesController(ShowNotesController controller) {
         this.showNotesController = controller;
     }
 }

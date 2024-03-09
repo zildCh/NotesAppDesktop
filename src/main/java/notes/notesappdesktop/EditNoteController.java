@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import notes.httpRequests.HttpRequest;
 import notes.models.Category;
 import notes.models.Note;
+import notes.models.Now;
 import notes.models.User;
 import notes.repository.CategoryRepository;
 import notes.repository.NoteRepository;
@@ -33,11 +34,10 @@ public class EditNoteController{
 
     private List<Category> categories; // Список категорий
     private List<Note> notes;
-    private showNotesController showNotesController;
+    private ShowNotesController showNotesController;
 
     private long note_id;
 
-   // public void setId2 (long note_id) {this.note_id = note_id;};
 
     public void setTitle(String title) {
         titleField.setText(title);
@@ -72,7 +72,6 @@ public class EditNoteController{
 
     @FXML
     private void saveNote() {
-
         System.out.println(categoryChoiceBox.getValue());
         String title = titleField.getText();
         String category = categoryChoiceBox.getValue();
@@ -83,15 +82,6 @@ public class EditNoteController{
 
         Note note2 = new Note(note_id,category_id, title, content, date);
 
-
-       // Note note = new Note(note_id,1, "title", "content", 0L);
-      /*  System.out.println(category_id);
-        System.out.println(content);
-        System.out.println(title);
-        System.out.println(note_id);*/
-        //noteRepo.deleteNote(note_id);
-       // noteRepo.deleteNote(note_id);
-        //ЗАкрываем окно
         Stage stage = (Stage) titleField.getScene().getWindow();
         stage.close();
 
@@ -107,7 +97,7 @@ public class EditNoteController{
         }
     }
 
-    public void setShowNotesController(showNotesController controller) {
+    public void setShowNotesController(ShowNotesController controller) {
         this.showNotesController = controller;
     }
 }

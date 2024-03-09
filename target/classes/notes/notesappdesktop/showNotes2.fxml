@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="887.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notes.notesappdesktop.showNotesController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="887.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notes.notesappdesktop.ShowNotesController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="241.0">
          <children>
@@ -26,7 +26,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="userLabel" layoutX="51.0" layoutY="478.0" text="User:" />
+            <Label layoutX="51.0" layoutY="478.0" text="User:" />
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateButton" text="Update" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="601.0">
