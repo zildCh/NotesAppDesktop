@@ -6,31 +6,54 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:controller="notes.notesappdesktop.NoteTileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notes.notesappdesktop.NoteTileController">
    <children>
-      <Label fx:id ="titleLabel" layoutX="14.0" layoutY="3.0" prefHeight="46.0" prefWidth="450.0" text="titleLabel">
+      <ImageView fitHeight="160.0" fitWidth="600.0" layoutY="5.0">
+         <image>
+            <Image url="@PNG/Ресурс 30.png" />
+         </image>
+      </ImageView>
+<!--      <ImageView fitHeight="38.0" fitWidth="266.0" layoutX="7.0" layoutY="7.0">
+         <image>
+            <Image url="@Ресурс 27.png" />
+         </image>
+      </ImageView>-->
+      <Label fx:id="titleLabel" layoutX="14.0" layoutY="3.0" prefHeight="46.0" prefWidth="450.0" text="titleLabel">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id ="contentLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="49.0" prefHeight="90.0" prefWidth="477.0" text="contentLabel">
+      <ImageView fitHeight="90.0" fitWidth="483.0" layoutX="8.0" layoutY="49.0">
+         <image>
+            <Image url="@PNG/Ресурс 28.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="contentLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="57.0" prefHeight="74.0" prefWidth="471.0" text="contentLabel">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id ="dateLabel" layoutX="503.0" layoutY="80.0" prefHeight="25.0" prefWidth="75.0" text="dateLabel">
+      <Label fx:id="dateLabel" layoutX="510.0" layoutY="68.0" prefHeight="25.0" prefWidth="75.0" text="dateLabel">
          <font>
             <Font size="16.0" />
          </font></Label>
-      <Label fx:id ="categoryLabel" layoutX="14.0" layoutY="125.0" text="categoryLabel" />
-      <ImageView onMouseClicked="#handleEditImageClick" fitHeight="38.0" fitWidth="45.0" layoutX="502.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="111.0" layoutX="7.0" layoutY="137.0">
+         <image>
+            <Image url="@PNG/Ресурс 29.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="categoryLabel" layoutX="32.0" layoutY="138.0" text="categoryLabel" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <ImageView onMouseClicked="#handleEditImageClick" fitHeight="32.0" fitWidth="33.0" layoutX="508.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@edit.png" />
          </image>
       </ImageView>
-      <ImageView onMouseClicked="#handleDeleteImageClick" fitHeight="38.0" fitWidth="45.0" layoutX="550.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#handleDeleteImageClick" fitHeight="38.0" fitWidth="45.0" layoutX="541.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@delete.png" />
+            <Image url="@PNG/Ресурс 26.png" />
          </image>
       </ImageView>
    </children>

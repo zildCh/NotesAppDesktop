@@ -57,10 +57,7 @@ public class NoteDAO {
             preparedStatement.setString(3, note.getContent());
             preparedStatement.setLong(4, date);
             preparedStatement.setLong(5, note.getId());
-            System.out.println("dfa:");
-            //System.out.println(id);
             preparedStatement.executeUpdate();
-            System.out.println("jopa2");
         } catch (SQLException e) {
             e.printStackTrace();
         }

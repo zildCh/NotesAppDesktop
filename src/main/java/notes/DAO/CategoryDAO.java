@@ -29,6 +29,12 @@ public class CategoryDAO {
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE category (category_id BIGINT PRIMARY KEY, category VARCHAR(255))");
             // Добавляем создание других таблиц, если это необходимо, например, таблицы категорий
+            statement.executeUpdate("INSERT INTO category (category_id, category) VALUES (1, 'No category')");
+            statement.executeUpdate("INSERT INTO category (category_id, category) VALUES (2, 'Family')");
+            statement.executeUpdate("INSERT INTO category (category_id, category) VALUES (3, 'Work')");
+            statement.executeUpdate("INSERT INTO category (category_id, category) VALUES (4, 'Personal')");
+            statement.executeUpdate("INSERT INTO category (category_id, category) VALUES (5, 'Sport')");
+            statement.executeUpdate("INSERT INTO category (category_id, category) VALUES (6, 'Study')");
         } catch (SQLException e) {
             e.printStackTrace();
         }

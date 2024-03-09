@@ -72,7 +72,7 @@ public class EditNoteController{
 
     @FXML
     private void saveNote() {
-        System.out.println(categoryChoiceBox.getValue());
+        //System.out.println(categoryChoiceBox.getValue());
         String title = titleField.getText();
         String category = categoryChoiceBox.getValue();
         String content = contentField.getText();

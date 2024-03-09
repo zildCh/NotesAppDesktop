@@ -62,16 +62,12 @@ public class AddNoteController implements Initializable {
         int category_id = categoryRepo.getCategoryIdByString(category);
         long date = now.timeInMillis();
 
-
         Note note = new Note(0L,category_id, title, content, date);
-
         long noteId = httpRequest.createNote(user, note);
 
         noteRepo.createNote(noteId, note);
 
         // noteRepo.createNote(note);
-
-
         //ЗАкрываем окно
         Stage stage = (Stage) titleField.getScene().getWindow();
         stage.close();

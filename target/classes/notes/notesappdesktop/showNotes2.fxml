@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,21 +15,49 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="241.0">
          <children>
-            <Button layoutX="95.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="42.0" prefWidth="71.0" text="Add Note" />
+            <ImageView fitHeight="598.0" fitWidth="893.0" layoutY="5.0">
+               <image>
+                  <Image url="@PNG/Ресурс 17.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="88.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="56.0" prefWidth="83.0" />
             <ChoiceBox fx:id="categoryFilterChoiceBox" layoutX="56.0" layoutY="155.0" prefWidth="150.0" />
-            <Label layoutX="56.0" layoutY="129.0" text="Category filter">
+            <Label layoutX="56.0" layoutY="129.0" prefHeight="26.0" prefWidth="150.0">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Button layoutX="180.0" layoutY="495.0" mnemonicParsing="false" onAction="#logoutButton" text="Logout" />
+            <Button layoutX="180.0" layoutY="495.0" mnemonicParsing="false" onAction="#logoutButton" prefHeight="14.0" prefWidth="54.0" />
             <Label fx:id="loginLabel" layoutX="51.0" layoutY="498.0" prefHeight="17.0" prefWidth="118.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="51.0" layoutY="478.0" text="User:" />
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateButton" text="Update" />
+            <Label layoutX="51.0" layoutY="478.0" text="User:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateButton" prefHeight="26.0" prefWidth="54.0" />
+            <ImageView fitHeight="36.0" fitWidth="177.0" layoutX="42.0" layoutY="121.0">
+               <image>
+                  <Image url="@PNG/Ресурс 19.png" />
+               </image>
+            </ImageView>
+            <ImageView onMouseClicked="#handleAddButton"  fitHeight="56.0" fitWidth="90.0" layoutX="85.0" layoutY="46.0">
+               <image>
+                  <Image url="@PNG/Ресурс 22.png" />
+               </image>
+            </ImageView>
+            <ImageView onMouseClicked="#updateButton"  fitHeight="26.0" fitWidth="55.0" layoutX="14.0" layoutY="14.0">
+               <image>
+                  <Image url="@PNG/Ресурс 23.png" />
+               </image>
+            </ImageView>
+            <ImageView onMouseClicked="#logoutButton" fitHeight="26.0" fitWidth="54.0" layoutX="180.0" layoutY="495.0">
+               <image>
+                  <Image url="@PNG/Ресурс 24.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="601.0">
          <children>
